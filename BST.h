@@ -24,7 +24,11 @@ TreeNode<T>::TreeNode(T d){
 
 template <typename T>
 TreeNode<T>::~TreeNode(){
-  //free all the memory
+  /* delete left;
+     delete right;
+  */
+  left = NULL;
+  right = NULL;
 }
 
 template <typename T>
@@ -62,7 +66,7 @@ BST<T>::BST(){
 
 template <typename T>
 BST<T>::~BST(){
-  //free all memory
+  delete root;//recursively delete root 
 }
 
 template <typename T>
@@ -157,12 +161,18 @@ void BST<T>::insertHelper(TreeNode<T>*& n, T& d){
 }
 
 template <typename T>
-T BST<T>::getMax(){ //assume non-empty tree
-  return getMaxHelper(root);
+T BST<T>::getMax(){
+  if(root->data == NULL){
+    cout << "Empty tree" << endl;
+    return;
+  }
+  else{
+    return getMaxHelper(root);
+  }
 }
 
 template <typename T>
-T BST<T>::getMaxHelper(TreeNode<T>* n){ //assume non-empty tree
+T BST<T>::getMaxHelper(TreeNode<T>* n){
   if(n->right == NULL){
     return n->data;
   } else{
@@ -171,12 +181,18 @@ T BST<T>::getMaxHelper(TreeNode<T>* n){ //assume non-empty tree
 }
 
 template <typename T>
-T BST<T>::getMin(){ //assume non-empty tree
-  return getMinHelper(root);
+T BST<T>::getMin(){
+  if(root->data == NULL){
+    cout << "Empty tree" << endl;
+    return;
+  }
+  else{
+    return getMinHelper(root);
+  }
 }
 
 template <typename T>
-T BST<T>::getMinHelper(TreeNode<T>* n){ //assume non-empty tree
+T BST<T>::getMinHelper(TreeNode<T>* n){
   if(n->left == NULL){
     return n->data;
   } else{
@@ -185,8 +201,14 @@ T BST<T>::getMinHelper(TreeNode<T>* n){ //assume non-empty tree
 }
 
 template <typename T> //must be a balanced tree to work
-T BST<T>::getMedian(){ //assume non-empty tree
-  return root->data;
+T BST<T>::getMedian(){
+  if(root->data == NULL){
+    cout << "Empty tree" << endl;
+    return;
+  }
+  else{
+    return root->data;
+  }
 }
 template <typename T>
 TreeNode<T>* BST<T>::getSuccessor(TreeNode<T>* child){
