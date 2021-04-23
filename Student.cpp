@@ -10,7 +10,7 @@ Student::Student(){
   m_facAdvisiD = 0;
 }
 
-Student::Student(string name, int iD; string level, int gradYear; string major; double gpa; int facAdvisiD){
+Student::Student(string name, int iD, string level, int gradYear, string major, double gpa, int facAdvisiD){
   m_name = name;
   m_iD = iD;
   m_level = level;
