@@ -21,7 +21,7 @@ Student::Student(string name, int iD, string level, int gradYear, string major, 
 }
 
 Student::~Student(){
-  delete Student;
+
 }
 
 void Student::setName(string name){
