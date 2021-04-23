@@ -2,6 +2,8 @@
 #define DL_LIST_H
 
 #include <cstdlib>
+#include <iostream>
+using namespace std;
 
 /*
  * Class ListNode contains variables for a node in a doubly linked list, data, and pointers to the next and previous node
