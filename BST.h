@@ -24,11 +24,12 @@ TreeNode<T>::TreeNode(T d){
 
 template <typename T>
 TreeNode<T>::~TreeNode(){
-  /* delete left;
-     delete right;
-  */
-  left = NULL;
-  right = NULL;
+  if (left != NULL){
+    delete left;
+  }
+  if (right != NULL){
+    delete right;
+  }
 }
 
 template <typename T>
