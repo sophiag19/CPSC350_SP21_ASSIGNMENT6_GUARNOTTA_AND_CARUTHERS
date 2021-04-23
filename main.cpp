@@ -1,5 +1,6 @@
 #include "BST.h"
 #include "Person.h"
+#include "Faculty.h"
 
 using namespace std;
 
@@ -11,4 +12,5 @@ int main(){
   //test.printInOrder();
   test.deleteValue(2);
   test.printInOrder();
+  return 0;
 }
