@@ -21,7 +21,7 @@ public:
 private://do we need these?
   string name;
   int iD;
-  //operators here or in child classes
+  
 
 }
 ;
