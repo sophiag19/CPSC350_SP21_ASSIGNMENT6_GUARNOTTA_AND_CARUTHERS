@@ -9,6 +9,10 @@ using namespace std;
 // need to write general find node alg to find all the people
 class Simualtion{
 public:
+  Simulation();
+  ~Simulation();
+  void simulate();
+  int displayMenu();
   void printStudnetsAscending();
   void printFacultyAscending();
   void printStudentGivenID(goldStudent, int iD);
@@ -23,6 +27,8 @@ public:
 private:
   BST<Student>* goldStudent;
   BST<Faculty>* goldFaculty;
+  BST<Student> studArr[5];
+  BST<Faculty> facArr[5];
 
 };
 
