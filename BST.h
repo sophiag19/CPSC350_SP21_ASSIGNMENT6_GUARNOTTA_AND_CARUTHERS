@@ -79,7 +79,7 @@ template <typename T>
 void BST<T>::printIOHelper(TreeNode<T>* n){
   if(n!=NULL){
     printIOHelper(n->left);
-    cout << n->data << endl;
+    n->data.printInfo();
     printIOHelper(n->right);
   }
 }
