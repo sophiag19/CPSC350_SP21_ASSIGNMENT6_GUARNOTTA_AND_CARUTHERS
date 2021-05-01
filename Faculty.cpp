@@ -77,6 +77,10 @@ void Faculty::printInfo(){
   cout << "Level: " << facultyLevel << endl;
   cout << "Department: " << facultyDepartment << endl;
   // FIXME: cout << adviseeList;
+  cout << "Advisee IDs: " << endl;
+  for(int i = 0; i < adviseeList->size();++i){
+    cout << adviseeList->peek(i) << endl;
+  }
 
 }
 
