@@ -24,7 +24,7 @@ Faculty::~Faculty(){
   for(int i = 0; i < adviseeList->size();++i){
     adviseeList->removeBack();
   }
-  delete adviseeList;
+  //delete adviseeList;
 }
 
 string Faculty::getName(){
