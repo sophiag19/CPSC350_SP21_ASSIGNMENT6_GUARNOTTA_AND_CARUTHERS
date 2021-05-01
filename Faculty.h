@@ -1,11 +1,11 @@
 #ifndef FACULTY_H
 #define FACULTY_H
-#include "Person.h"
+//#include "Person.h"
 #include "DLList.h"
 
 using namespace std;
 
-class Faculty: public Person{
+class Faculty/*: public Person*/{
 public:
   Faculty();
   Faculty(string name, int iD, string level, string dept);
