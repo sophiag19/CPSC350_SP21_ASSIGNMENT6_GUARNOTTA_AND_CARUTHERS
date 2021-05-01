@@ -1,11 +1,11 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 #include "DLList.h"
-#include "Person.h"
+//#include "Person.h"
 
 using namespace std;
 
-class Student: public Person{
+class Student/*: public Person*/{
 public:
   Student();
   Student(string name, int iD, string level, int gradYear, string major, double gpa, int facAdvisiD);
