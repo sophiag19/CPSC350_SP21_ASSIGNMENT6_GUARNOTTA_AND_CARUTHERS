@@ -18,7 +18,7 @@ public:
   void setID(int iD);
   void setLevel(string level);
   void setDepartment(string dept);
-  void addAdvisee(int sID);
+  DLList<int>* addAdvisee(int sID);
   void deleteAdvisee(int sID);
   void printInfo();
   bool isAdvisee(int sID);

@@ -59,9 +59,13 @@ void Faculty::setDepartment(string dept){
   facultyDepartment = dept;
 }
 
-void Faculty::addAdvisee(int sID){
-  adviseeList->insertBack(sID);
+DLList<int>* Faculty::addAdvisee(int sID){
+  //cout << "student id" << sID << endl;
+  adviseeList->insertFront(sID);
+  cout << "peek" << adviseeList->peek(0) << endl;
+  return adviseeList;
 }
+
 
 void Faculty::deleteAdvisee(int sID){
   for(int i = 0; i < adviseeList->size(); ++i){
@@ -76,11 +80,16 @@ void Faculty::printInfo(){
   cout << "ID number: " << facultyID << endl;
   cout << "Level: " << facultyLevel << endl;
   cout << "Department: " << facultyDepartment << endl;
-  // FIXME: cout << adviseeList;
   cout << "Advisee IDs: " << endl;
+  int id = adviseeList->peek(0);
+  /*
   for(int i = 0; i < adviseeList->size();++i){
-    cout << adviseeList->peek(i) << endl;
+    cout << adviseeList->peek(i); << endl;
   }
+  */
+  cout << " advisee id " << &id << endl;
+  //cout << "peek again " << adviseeList->peek(&id) << endl;
+
 
 }
 

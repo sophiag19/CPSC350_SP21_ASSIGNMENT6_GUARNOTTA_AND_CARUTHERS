@@ -37,12 +37,12 @@ class BST{
 public:
   BST();
   ~BST();
-  bool contains(T d);
+  bool contains(int d);
   void insert(T d);
   bool recContains(T d);
   void printInOrder();
   void printPostOrder();
-  void deleteValue(T d);
+  void deleteValue(int d);
   T getMax();
   T getMin();
   T getMedian();
@@ -56,7 +56,7 @@ public:
   T getMaxHelper(TreeNode<T>* n);
   T getMinHelper(TreeNode<T>* n);
   TreeNode<T>* getSuccessor(TreeNode<T>* child);
-  void findTarget(T key, TreeNode<T>*& target, TreeNode<T>*& parent);
+  void findTarget(int key, TreeNode<T>*& target, TreeNode<T>*& parent);
 };
 
 template <typename T>
@@ -118,17 +118,18 @@ bool BST<T>::recContainsHelper(TreeNode<T>* n, T d){
 }
 
 template <typename T>
-bool BST<T>::contains(T d){ //no repeated values
+bool BST<T>::contains(int d){ //no repeated values
   if(root==NULL){
     return false;
   }
-  if(root->data==d){
+  if(root->data.getID()==d){
+    root->data.printInfo();
     return true;
   }
   bool found = false;
   TreeNode<T>* current = root;
   while(!found){
-    if(d > current->data){
+    if(d > current->data.getID()){
       current = current->right;
     } else{
       current = current->left;
@@ -137,7 +138,8 @@ bool BST<T>::contains(T d){ //no repeated values
       found = false;
       break;
     }
-    if(current->data==d){
+    if(current->data.getID()==d){
+      current->data.printInfo();
       found = true;
       break;
     }
@@ -220,10 +222,10 @@ TreeNode<T>* BST<T>::getSuccessor(TreeNode<T>* child){
   return child;
 }
 template <typename T>
-void BST<T>::findTarget(T key, TreeNode<T>*& target, TreeNode<T>*& parent){
-  while(target != NULL && target->data != key){
+void BST<T>::findTarget(int key, TreeNode<T>*& target, TreeNode<T>*& parent){
+  while(target != NULL && target->data.getID() != key){
     parent = target;
-    if(key < target->data){
+    if(key < target->data.getID()){
       target = target->left;
     } else{
       target = target->right;
@@ -232,7 +234,7 @@ void BST<T>::findTarget(T key, TreeNode<T>*& target, TreeNode<T>*& parent){
 }
 
 template <typename T>
-void BST<T>::deleteValue(T d){
+void BST<T>::deleteValue(int d){
   TreeNode<T>* parent = NULL;
   TreeNode<T>* current = NULL;
 
@@ -260,7 +262,7 @@ void BST<T>::deleteValue(T d){
     TreeNode<T>* suc = getSuccessor(current->right);
     T temp = suc->data;
     //cout << suc->data << endl;
-    this->deleteValue(suc->data);
+    this->deleteValue(suc->data.getID());
     current->data = temp;
 
   } else{ //only 1 child

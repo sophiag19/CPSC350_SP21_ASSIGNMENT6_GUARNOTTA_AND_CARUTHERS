@@ -96,7 +96,9 @@ int DLList<T>::size(){
  */
 template <typename T>
 void DLList<T>::insertFront(T d){
+  cout << "data " << d << endl;
   ListNode<T>* newNode = new ListNode<T>(d);
+
   if(isEmpty()){
     back = newNode;
   } else{
@@ -296,6 +298,7 @@ T DLList<T>::peek(int p){
     if(i == -1){
       cout << "An exception has occurred, you tried to peek at an empty list" << endl;
     }
+    cout << "ret " << ret<< endl;
   }
   return ret;
 }
