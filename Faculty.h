@@ -14,11 +14,12 @@ public:
   int getID();
   string getLevel();
   string getDepartment();
+  DLList<int>* getAdviseeList();
   void setName(string name);
   void setID(int iD);
   void setLevel(string level);
   void setDepartment(string dept);
-  DLList<int>* addAdvisee(int sID);
+  void addAdvisee(int sID);
   void deleteAdvisee(int sID);
   void printInfo();
   bool isAdvisee(int sID);
@@ -38,3 +39,4 @@ private:
 }
 ;
 #endif
+
