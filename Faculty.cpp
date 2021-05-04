@@ -10,7 +10,6 @@ Faculty::Faculty(){
   adviseeList = new DLList<int>;
 
 }
-
 Faculty::Faculty(string name, int iD, string level, string dept){
   facultyName = name;
   facultyID = iD;
