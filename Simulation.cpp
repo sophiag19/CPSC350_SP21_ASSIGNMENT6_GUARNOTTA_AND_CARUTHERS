@@ -5,9 +5,8 @@ using namespace std;
 Simulation::Simulation(){
   goldStudent = new BST<Student>;
   goldFaculty = new BST<Faculty>;
-  // studQ = new CirQ<BST<Student>>(5);
-  // facQ = new CirQ<BST<Faculty>>(5);
   advisee = new DLList<int>;
+  rollStack = new DLLStack<int>;
 }
 
 Simulation::~Simulation(){
@@ -40,6 +39,7 @@ void Simulation::simulate(){
   while(userChoice != 14){
     if(userChoice == 1){
       printStudnetsAscending();
+      rollStack.push(1);
     }
     else if(userChoice == 2){
       printFacultyAscending();
@@ -123,11 +123,9 @@ void Simulation::simulate(){
   //print out files
   BST<Student>* tempStudent = new BST<Student>;
   tempStudent = goldStudent;
-  //studQ->add(tempStudent);
 
   BST<Faculty>* tempFaculty = new BST<Faculty>;
   tempFaculty = goldFaculty;
-  //facQ->add(tempFaculty);
 
 
   }
@@ -232,4 +230,28 @@ void Simulation::deleteAdvisee(int studentID, int facultyID){
       advisee->removeFrom(i);
     }
   }
+}
+
+void Simulation::rollBack(int studentID, int facultyID){
+  if (rollStack->pop() == 7){
+    int id = rollStack->pop()->getID();
+    goldStudent->deleteStudent(id);
+    rollStack.pop();
+  }
+  else if (rollStack->pop() == 8){
+    int id = rollStack->pop()->getID();
+    goldStudent->addStudent(id); //FIXME: CREATE THIS METHOD
+    rollStack.pop();
+  }
+  else if (rollStack->pop() == 9){
+    int id = rollStack->pop()->getID();
+    goldFaculty->deleteFaculty(id);
+    rollStack.pop();
+  }
+  else if (rollStack->pop() == 10){
+    int id = rollStack->pop()->getID();
+    goldFaculty->addFaculty(id); //FIXME: CREATE THIS METHOD
+    rollStack.pop();
+  }
+
 }
