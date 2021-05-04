@@ -216,6 +216,7 @@ void Simulation::printFacAdviseeList(int iD){
   advisee = goldFaculty->containsAdviseeList(iD);
   for (int i=0; i<advisee->size(); ++i){
     int id = advisee->peek(i);
+    cout << advisee->peek(i) << endl;
     goldStudent->contains(id);
   }
 }
