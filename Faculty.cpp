@@ -10,6 +10,7 @@ Faculty::Faculty(){
   adviseeList = new DLList<int>;
 
 }
+
 Faculty::Faculty(string name, int iD, string level, string dept){
   facultyName = name;
   facultyID = iD;
@@ -20,9 +21,9 @@ Faculty::Faculty(string name, int iD, string level, string dept){
 }
 
 Faculty::~Faculty(){
-  for(int i = 0; i < adviseeList->size();++i){
-    adviseeList->removeBack();
-  }
+  // for(int i = 0; i < adviseeList->size();++i){
+  //   adviseeList->removeBack();
+  // }
   //delete adviseeList;
 }
 
@@ -58,13 +59,9 @@ void Faculty::setDepartment(string dept){
   facultyDepartment = dept;
 }
 
-DLList<int>* Faculty::addAdvisee(int sID){
-  //cout << "student id" << sID << endl;
+void Faculty::addAdvisee(int sID){
   adviseeList->insertFront(sID);
-  cout << "peek" << adviseeList->peek(0) << endl;
-  return adviseeList;
 }
-
 
 void Faculty::deleteAdvisee(int sID){
   for(int i = 0; i < adviseeList->size(); ++i){
@@ -80,15 +77,9 @@ void Faculty::printInfo(){
   cout << "Level: " << facultyLevel << endl;
   cout << "Department: " << facultyDepartment << endl;
   cout << "Advisee IDs: " << endl;
-  int id = adviseeList->peek(0);
-  /*
-  for(int i = 0; i < adviseeList->size();++i){
-    cout << adviseeList->peek(i); << endl;
-  }
-  */
-  cout << " advisee id " << &id << endl;
-  //cout << "peek again " << adviseeList->peek(&id) << endl;
-
+for(int i = 0; i < adviseeList->size();++i){
+  cout << adviseeList->peek(i) << endl;
+}
 
 }
 
@@ -100,6 +91,11 @@ bool Faculty::isAdvisee(int sID){
     }
   }
   return ret;
+}
+
+DLList<int>* Faculty::getAdviseeList(){
+  cout << "List size: " << adviseeList->size() << endl;
+  return adviseeList;
 }
 
 // lines 85-104: https://www.tutorialspoint.com/cplusplus/cpp_overloading.htm
