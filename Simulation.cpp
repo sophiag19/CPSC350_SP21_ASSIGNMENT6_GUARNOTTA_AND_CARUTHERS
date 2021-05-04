@@ -5,8 +5,9 @@ using namespace std;
 Simulation::Simulation(){
   goldStudent = new BST<Student>;
   goldFaculty = new BST<Faculty>;
-  BST<Student>* studArr [5];
-  BST<Faculty>* facArr[5];
+  // studQ = new CirQ<BST<Student>>(5);
+  // facQ = new CirQ<BST<Faculty>>(5);
+  advisee = new DLList<int>;
 }
 
 Simulation::~Simulation(){
@@ -57,20 +58,19 @@ void Simulation::simulate(){
       cin >> id;
       printFacultyGivenID(id);
     }
-    /*
+
     else if(userChoice == 5){
       int id;
       cout << "What is the student's ID number?" << endl;
       cin >> id;
-      printFacGivenStudentID(goldStudent, goldFaculty, id);
+      printFacGivenStudentID(id);
     }
     else if(userChoice == 6){
       int id;
       cout << "What is the faculty member's ID number?" << endl;
       cin >> id;
-      printFacAdviseeList(goldStudent, goldFaculty, id);
+      printFacAdviseeList(id);
     }
-    */
     else if(userChoice == 7){
       createAndAddStudent();
     }
@@ -92,7 +92,6 @@ void Simulation::simulate(){
       cin >> id;
       deleteFaculty(id);
     }
-    /*
     else if(userChoice == 11){
       int id;
       cout << "What is the student's ID number?" << endl;
@@ -100,14 +99,19 @@ void Simulation::simulate(){
       int id2;
       cout << "What is the new faculty member's ID number?" << endl;
       cin >> id2;
-      changeStudentAdvisor(id, id2, goldStudent, goldFaculty);
+      changeStudentAdvisor(id, id2);
     }
+
     else if(userChoice == 12){
       int id;
+      int id2;
       cout << "What is the student's ID number?" << endl;
       cin >> id;
-      deleteAdvisee(id);
+      cout << "What is the faculty member's ID number?" << endl;
+      cin >> id2;
+      deleteAdvisee(id, id2);
     }
+    /*
     else if(userChoice == 13){
       rollBack();
     }
@@ -117,7 +121,17 @@ void Simulation::simulate(){
   }
   cout << "Program Terminated" << endl;
   //print out files
-}
+  BST<Student>* tempStudent = new BST<Student>;
+  tempStudent = goldStudent;
+  //studQ->add(tempStudent);
+
+  BST<Faculty>* tempFaculty = new BST<Faculty>;
+  tempFaculty = goldFaculty;
+  //facQ->add(tempFaculty);
+
+
+  }
+//}
 
 void Simulation::printStudnetsAscending(){
   goldStudent->printInOrder();
@@ -191,4 +205,30 @@ void Simulation::deleteStudent(int id){
 
 void Simulation::deleteFaculty(int id){
   goldFaculty->deleteValue(id);
+}
+
+void Simulation::printFacGivenStudentID(int iD){
+  int foundID = goldStudent->containsID(iD);
+  goldFaculty->contains(foundID);
+}
+
+void Simulation::printFacAdviseeList(int iD){
+  advisee = goldFaculty->containsAdviseeList(iD);
+  for (int i=0; i<advisee->size(); ++i){
+    int id = advisee->peek(i);
+    goldStudent->contains(id);
+  }
+}
+
+void Simulation::changeStudentAdvisor(int studentID, int facultyID){
+  goldStudent->containsChange(studentID, facultyID);
+}
+
+void Simulation::deleteAdvisee(int studentID, int facultyID){
+  advisee = goldFaculty->containsAdviseeList(facultyID);
+  for (int i=0; i<advisee->size(); ++i){
+    if (advisee->peek(i) == studentID){
+      advisee->removeFrom(i);
+    }
+  }
 }
