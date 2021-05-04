@@ -3,6 +3,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include "DLList.h"
 using namespace std;
 
 template <typename T>
@@ -37,12 +38,15 @@ class BST{
 public:
   BST();
   ~BST();
+  int containsID(int d);
   bool contains(int d);
   void insert(T d);
   bool recContains(T d);
+  DLList<int>* containsAdviseeList(int d);
   void printInOrder();
   void printPostOrder();
   void deleteValue(int d);
+  void containsChange(int studentID, int facultyID);
   T getMax();
   T getMin();
   T getMedian();
@@ -145,6 +149,98 @@ bool BST<T>::contains(int d){ //no repeated values
     }
   }
   return found;
+}
+
+template <typename T>
+DLList<int>* BST<T>::containsAdviseeList(int d){ //no repeated values
+  DLList<int>* advisees;
+  if(root==NULL){
+    return advisees;
+  }
+  if(root->data.getID()==d){
+    return root->data.getAdviseeList();
+  }
+  bool found = false;
+  TreeNode<T>* current = root;
+  while(!found){
+    if(d > current->data.getID()){
+      current = current->right;
+    } else{
+      current = current->left;
+    }
+    if(current==NULL){
+      found = false;
+      break;
+    }
+    if(current->data.getID()==d){
+      advisees = current->data.getAdviseeList();
+      found = true;
+      break;
+    }
+  }
+  return advisees;
+}
+
+template <typename T>
+int BST<T>::containsID(int d){ //no repeated values
+int stuID;
+  if(root==NULL){
+    return -1;
+  }
+  if(root->data.getID()==d){
+    stuID = root->data.getFacAdvisiD();
+    return stuID;
+  }
+  bool found = false;
+  TreeNode<T>* current = root;
+  while(!found){
+    if(d > current->data.getID()){
+      current = current->right;
+    } else{
+      current = current->left;
+    }
+    if(current==NULL){
+      return -1;
+      found = false;
+      break;
+    }
+    if(current->data.getID()==d){
+      stuID = current->data.getFacAdvisiD();
+      found = true;
+      break;
+    }
+  }
+  return stuID;
+}
+
+template <typename T>
+void BST<T>::containsChange(int studentID, int facultyID){ //no repeated values
+  if(root==NULL){
+    return;
+  }
+  if(root->data.getID()==studentID){
+    root->data.setFacAdvisID(facultyID);
+    return;
+  }
+  bool found = false;
+  TreeNode<T>* current = root;
+  while(!found){
+    if(studentID > current->data.getID()){
+      current = current->right;
+    } else{
+      current = current->left;
+    }
+    if(current==NULL){
+      found = false;
+      break;
+    }
+    if(current->data.getID()==studentID){
+      current->data.setFacAdvisID(facultyID);
+      found = true;
+      break;
+    }
+  }
+  return;
 }
 
 template <typename T>
