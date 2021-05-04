@@ -28,6 +28,7 @@ public:
   void deleteFaculty(int iD);
   void changeStudentAdvisor(int studentID, int facultyID); // update student.setFacAdvisID() with new ID
   void deleteAdvisee(int studentID, int facultyID); // move method from faculty class here
+  void rollBack(int studentID, int facultyID);
 
 private:
   BST<Student>* goldStudent;
