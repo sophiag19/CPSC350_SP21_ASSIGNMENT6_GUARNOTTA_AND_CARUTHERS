@@ -1,6 +1,6 @@
 #ifndef DLSTACK4_H
 #define DLSTACK4_H
-#include "DLList2.h"
+#include "DLList.h"
 
 template <typename T> //allows for generic type placeholder
 // implementation must go in header file
@@ -14,6 +14,7 @@ public:
   void push(T c); //add to top
   T pop(); //remove from top
   T peek(); //return top item without removing
+  DLList<T> getStackDL();
   bool isEmpty();
   int size();
 
@@ -54,6 +55,11 @@ T DlStack<T>::pop(){
 template <typename T>
 T DlStack<T>::peek(){
   return (stackDL.peek(0));
+}
+
+template <typename T>
+DLList<T> DlStack<T>::getStackDL(){
+  return stackDL;
 }
 
 

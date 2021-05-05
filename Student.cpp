@@ -66,9 +66,10 @@ int Student::getID(){
   return m_iD;
 }
 
-string Student::setLevel(){
+string Student::getLevel(){
   return m_level;
 }
+
 
 int Student::getGradYear(){
   return m_gradYear;

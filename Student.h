@@ -22,7 +22,7 @@ public:
 
   string getName();
   int getID();
-  string setLevel();
+  string getLevel();
   int getGradYear();
   string getMajor();
   double getGpa();
