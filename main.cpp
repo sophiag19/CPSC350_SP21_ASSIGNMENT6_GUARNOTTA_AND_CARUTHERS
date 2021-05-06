@@ -1,8 +1,8 @@
 #include "BST.h"
-#include "Person.h"
 #include "Faculty.h"
 #include "Student.h"
 #include "Simulation.h"
+#include "FileProcessor.h"
 
 using namespace std;
 
@@ -23,6 +23,8 @@ int main(){
   f3.addAdvisee(18);
   test.printInOrder();
   */
+  //FileProcessor fp1;
+  //fp1.readFromFile(Student);
   Simulation s1;
   s1.simulate();
   return 0;

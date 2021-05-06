@@ -1,0 +1,14 @@
+sophia
+3
+fresh
+24
+4.300000
+cs
+1
+sarah
+4
+soph
+23
+4.300000
+phys
+1

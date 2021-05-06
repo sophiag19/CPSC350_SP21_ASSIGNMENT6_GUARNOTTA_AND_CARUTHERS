@@ -9,6 +9,8 @@ Simulation::Simulation(){
   rollStack = new DlStack<int>;
   deletedStudent = Student();
   deletedFaculty = Faculty();
+  prevFacID = 0;
+  adviseeID = 0;
 }
 
 Simulation::~Simulation(){
@@ -36,6 +38,7 @@ int Simulation::displayMenu(){
 }
 
 void Simulation::simulate(){
+
   int userChoice;
   userChoice = displayMenu();
   while(userChoice != 14){
@@ -107,7 +110,9 @@ void Simulation::simulate(){
       int id2;
       cout << "What is the new faculty member's ID number?" << endl;
       cin >> id2;
-      changeStudentAdvisor(id, id2);
+      prevFacID = changeStudentAdvisor(id, id2);
+      rollStack->push(id);
+      rollStack->push(prevFacID);
       rollStack->push(11);
     }
 
@@ -118,19 +123,23 @@ void Simulation::simulate(){
       cin >> id;
       cout << "What is the faculty member's ID number?" << endl;
       cin >> id2;
-      deleteAdvisee(id, id2);
+      adviseeID = deleteAdvisee(id, id2);
+      rollStack->push(id2);
+      rollStack->push(adviseeID);
       rollStack->push(12);
     }
     else if(userChoice == 13){
-      rollBack();
+      int userIn;
+      int i = 0;
+      while(i <5 && userIn != 0){
+        rollBack();
+        cout << "If you want to continue to roll back, enter 1, if you would like to exit rollback, enter 0: " << endl;
+        cin >> userIn;
+      }
     }
     userChoice = displayMenu();
 
-    if(rollStack->size() > 5){
-      rollStack->getStackDL().removeBack();
-    }
   }
-  cout << "Program Terminated" << endl;
   //print out files
   BST<Student>* tempStudent = new BST<Student>;
   tempStudent = goldStudent;
@@ -138,7 +147,8 @@ void Simulation::simulate(){
   BST<Faculty>* tempFaculty = new BST<Faculty>;
   tempFaculty = goldFaculty;
 
-
+  goldStudent->fileProcessor("StudentTable.txt");
+  goldFaculty->fileProcessor("FacultyTable.txt");
   }
 //}
 
@@ -172,11 +182,13 @@ void Simulation::createAndAddStudent(){
   cin >> gPA;
   cout << "What is the student's faculty advisor's ID number?" << endl;
   cin >> facAdvisID;
-  //need if statement here
-  /*
-  advisee = goldFaculty->containsAdviseeList(facAdvisID);
-  advisee->insertFront(id);
-  */
+
+  if(goldFaculty->containsCheck(facAdvisID)){
+    advisee = goldFaculty->containsAdviseeList(facAdvisID);
+    advisee->insertFront(id);
+  }
+
+
   Student temp(name, id, level, gradYear, major, gPA, facAdvisID);
   deletedStudent = temp;
   goldStudent->insert(temp);
@@ -248,17 +260,33 @@ void Simulation::printFacAdviseeList(int iD){
   }
 }
 
-void Simulation::changeStudentAdvisor(int studentID, int facultyID){
-  goldStudent->containsChange(studentID, facultyID);
+int Simulation::changeStudentAdvisor(int studentID, int facultyID){
+  if(goldFaculty->containsCheck(facultyID)){
+    advisee = goldFaculty->containsAdviseeList(facultyID);
+    advisee->insertFront(studentID);
+    return goldStudent->containsChange(studentID, facultyID);
+  }
+  else{
+    cout << "This advisor is not in the database, please try again" << endl;
+  }
+
+}
+void Simulation::addAdviseeRoll(int sID, int fID){
+  /*
+  Faculty f;
+  f = goldFaculty->containsFac(fID);
+  f.addAdvisee(sID);
+  */
 }
 
-void Simulation::deleteAdvisee(int studentID, int facultyID){
+int Simulation::deleteAdvisee(int studentID, int facultyID){
   advisee = goldFaculty->containsAdviseeList(facultyID);
   for (int i=0; i<advisee->size(); ++i){
     if (advisee->peek(i) == studentID){
       advisee->removeFrom(i);
     }
   }
+  return studentID;
 }
 
 void Simulation::rollBack(){
@@ -280,6 +308,20 @@ void Simulation::rollBack(){
   else if (rollStack->peek() == 10){
     rollStack->pop();
     addFaculty(deletedFaculty.getName(), deletedFaculty.getID(), deletedFaculty.getLevel(), deletedFaculty.getDepartment());
+  }
+  else if(rollStack->peek() == 11){
+    rollStack->pop();
+    int prevID = rollStack->pop();
+    int stuID = rollStack->pop();
+    changeStudentAdvisor(stuID, prevID);
+
+  }
+  else if(rollStack->peek() == 12){
+    rollStack->pop();
+    int adviseeId = rollStack->pop();
+    int facId = rollStack->pop();
+    advisee = goldFaculty->containsAdviseeList(facId);
+    advisee->insertFront(adviseeId);
   }
   return;
 }

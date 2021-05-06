@@ -2,12 +2,15 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
-using namespace std;
+
 #include "Student.h"
 #include "Faculty.h"
 #include "BST.h"
 #include "DLLStack.h"
-//#include "CirQ.h"
+#include <fstream>
+
+using namespace std;
+
 
 // need to write general find node alg to find all the people
 class Simulation{
@@ -16,6 +19,7 @@ public:
   ~Simulation();
   void simulate();
   int displayMenu();
+  void addAdviseeRoll(int sID, int fID);
   void createAndAddStudent();
   void createAndAddFaculty();
   void printStudnetsAscending();
@@ -28,8 +32,8 @@ public:
   void deleteFaculty(int iD);
   void addStudent(string name, int id, string level, int gradYear, string major, double gpa, int facAdvisId);
   void addFaculty(string name, int id, string level, string dept);
-  void changeStudentAdvisor(int studentID, int facultyID); // update student.setFacAdvisID() with new ID
-  void deleteAdvisee(int studentID, int facultyID); // move method from faculty class here
+  int changeStudentAdvisor(int studentID, int facultyID); // update student.setFacAdvisID() with new ID
+  int deleteAdvisee(int studentID, int facultyID); // move method from faculty class here
   void rollBack();
 
 
@@ -40,6 +44,8 @@ private:
   DlStack<int>* rollStack;
   Student deletedStudent;
   Faculty deletedFaculty;
+  int prevFacID;
+  int adviseeID;
 };
 
 #endif

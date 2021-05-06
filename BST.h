@@ -4,6 +4,9 @@
 #include <cstdlib>
 #include <iostream>
 #include "DLList.h"
+#include "Student.h"
+#include <string>
+#include <fstream>
 using namespace std;
 
 template <typename T>
@@ -40,13 +43,17 @@ public:
   ~BST();
   int containsID(int d);
   bool contains(int d);
+  bool containsCheck(int d);
   void insert(T d);
   bool recContains(T d);
+  T* containsFac(int d);
   DLList<int>* containsAdviseeList(int d);
   void printInOrder();
   void printPostOrder();
   void deleteValue(int d);
-  void containsChange(int studentID, int facultyID);
+  void fileProcessor(string outFile);
+  void fileProcessorHelper(TreeNode<T>* n, string outFile, ofstream& outFS);
+  int containsChange(int studentID, int facultyID);
   T getMax();
   T getMin();
   T getMedian();
@@ -75,6 +82,7 @@ BST<T>::~BST(){
   size = 0;
 }
 
+
 template <typename T>
 void BST<T>::printInOrder(){
   printIOHelper(root);
@@ -86,6 +94,27 @@ void BST<T>::printIOHelper(TreeNode<T>* n){
     n->data.printInfo();
     printIOHelper(n->right);
   }
+}
+
+
+template <typename T>
+void BST<T>::fileProcessor(string outFile){
+  ofstream outFS;
+  outFS.open(outFile);
+  fileProcessorHelper(root, outFile, outFS);
+  outFS.close();
+}
+template <typename T>
+void BST<T>::fileProcessorHelper(TreeNode<T>* n, string outFile, ofstream& outFS){
+  //ofstream outFS;
+  //outFS.open(outFile);
+  if(n!=NULL){
+    fileProcessorHelper(n->left, outFile, outFS);
+    //n->data.print(outFS);
+    outFS << n->data.toString();
+    fileProcessorHelper(n->right, outFile, outFS);
+  }
+  //outFS.close();
 }
 
 template <typename T>
@@ -144,6 +173,36 @@ bool BST<T>::contains(int d){ //no repeated values
     }
     if(current->data.getID()==d){
       current->data.printInfo();
+      found = true;
+      break;
+    }
+  }
+  return found;
+}
+
+template <typename T>
+bool BST<T>::containsCheck(int d){ //no repeated values
+  if(root==NULL){
+    return false;
+  }
+  if(root->data.getID()==d){
+    root->data;
+    return true;
+  }
+  bool found = false;
+  TreeNode<T>* current = root;
+  while(!found){
+    if(d > current->data.getID()){
+      current = current->right;
+    } else{
+      current = current->left;
+    }
+    if(current==NULL){
+      found = false;
+      break;
+    }
+    if(current->data.getID()==d){
+      current->data;
       found = true;
       break;
     }
@@ -214,13 +273,15 @@ int stuID;
 }
 
 template <typename T>
-void BST<T>::containsChange(int studentID, int facultyID){ //no repeated values
+int BST<T>::containsChange(int studentID, int facultyID){ //no repeated values
+  int prevID = 0;
   if(root==NULL){
-    return;
+    return prevID;
   }
   if(root->data.getID()==studentID){
+    prevID = root->data.getFacAdvisiD();
     root->data.setFacAdvisID(facultyID);
-    return;
+    return prevID;
   }
   bool found = false;
   TreeNode<T>* current = root;
@@ -235,12 +296,47 @@ void BST<T>::containsChange(int studentID, int facultyID){ //no repeated values
       break;
     }
     if(current->data.getID()==studentID){
+      prevID = current->data.getFacAdvisiD();
       current->data.setFacAdvisID(facultyID);
       found = true;
       break;
     }
   }
-  return;
+  return prevID;
+}
+
+template <typename T>
+T* BST<T>::containsFac(int d){ //no repeated values
+  /*
+  T* fac = new Faculty;
+  if(root==NULL){
+    return fac;
+  }
+  if(root->data.getID()==d){
+    //root->data;
+    fac = root->data;
+    return fac;
+  }
+  bool found = false;
+  TreeNode<T>* current = root;
+  while(!found){
+    if(d > current->data.getID()){
+      current = current->right;
+    } else{
+      current = current->left;
+    }
+    if(current==NULL){
+      found = false;
+      break;
+    }
+    if(current->data.getID()==d){
+      fac = current->data;
+      found = true;
+      break;
+    }
+  }
+  return fac;
+  */
 }
 
 template <typename T>

@@ -21,6 +21,7 @@ public:
   void setDepartment(string dept);
   void addAdvisee(int sID);
   void deleteAdvisee(int sID);
+  string toString();
   void printInfo();
   bool isAdvisee(int sID);
 
@@ -39,4 +40,3 @@ private:
 }
 ;
 #endif
-

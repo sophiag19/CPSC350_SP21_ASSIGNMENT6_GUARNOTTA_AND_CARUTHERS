@@ -96,7 +96,6 @@ int DLList<T>::size(){
  */
 template <typename T>
 void DLList<T>::insertFront(T d){
-  cout << "data " << d << endl;
   ListNode<T>* newNode = new ListNode<T>(d);
 
   if(isEmpty()){

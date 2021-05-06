@@ -63,6 +63,24 @@ void Faculty::addAdvisee(int sID){
   adviseeList->insertFront(sID);
 }
 
+string Faculty::toString(){
+  string iD = to_string(facultyID);
+  string ret = facultyName;
+  ret.push_back('\n');
+  ret = ret.append(to_string(facultyID));
+  ret.push_back('\n');
+  ret = ret.append(facultyLevel);
+  ret.push_back('\n');
+  ret = ret.append(facultyDepartment);
+  ret.push_back('\n');
+  for(int i = 0; i < adviseeList->size();++i){
+    string temp = to_string(adviseeList->peek(i));
+    ret = ret.append(temp);
+    ret.push_back('\n');
+  }
+  return ret;
+ }
+
 void Faculty::deleteAdvisee(int sID){
   for(int i = 0; i < adviseeList->size(); ++i){
     if(adviseeList->peek(i) == sID){
@@ -94,7 +112,6 @@ bool Faculty::isAdvisee(int sID){
 }
 
 DLList<int>* Faculty::getAdviseeList(){
-  cout << "List size: " << adviseeList->size() << endl;
   return adviseeList;
 }
 

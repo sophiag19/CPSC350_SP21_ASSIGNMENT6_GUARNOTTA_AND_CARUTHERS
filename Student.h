@@ -1,6 +1,8 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 #include "DLList.h"
+#include <fstream>
+#include "BST.h"
 //#include "Person.h"
 
 using namespace std;
@@ -19,6 +21,7 @@ public:
   void setGpa(double gpa);
   void setFacAdvisID(int facAdvisiD);
   void printInfo();
+  string toString();
 
   string getName();
   int getID();

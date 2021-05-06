@@ -58,6 +58,14 @@ void Student::printInfo(){
   cout << "Faculty Advisor ID: " << m_facAdvisiD << endl;
  }
 
+ string Student::toString(){
+   string iD = to_string(m_iD);
+   string year = to_string(m_gradYear);
+   string gpa = to_string(m_gpa);
+   string advisID = to_string(m_facAdvisiD);
+   return (m_name + "\n" + iD +  "\n" + m_level + "\n" + year + "\n" + gpa + "\n" + m_major + "\n" + advisID + "\n");
+  }
+
 string Student::getName(){
   return m_name;
 }
