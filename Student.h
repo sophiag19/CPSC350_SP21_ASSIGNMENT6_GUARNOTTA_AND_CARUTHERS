@@ -1,3 +1,10 @@
+/* Sarah Caruthers and Sophia Guarnotta
+2350081, 2369941
+caruthers@chapman.edu, guarnotta@chapman.edu
+CPSC 350-03
+Programming Assignment 6: Building a DataBase with Bianry Search Trees
+*/ 
+
 #ifndef STUDENT_H
 #define STUDENT_H
 #include "DLList.h"
@@ -20,7 +27,7 @@ public:
   void setGpa(double gpa);
   void setFacAdvisID(int facAdvisiD);
   void printInfo();
-  string toString();
+  string toString(); // for file processing
   string getName();
   int getID();
   string getLevel();
@@ -29,12 +36,14 @@ public:
   double getGpa();
   int getFacAdvisiD();
 
+  // operator overloading 
   // https://www.tutorialspoint.com/cplusplus/cpp_overloading.htm
   bool operator<(Student &s2);
   bool operator>(Student &s2);
   bool operator==(Student &s2);
 
 private:
+  // student info
   string m_name;
   int m_iD;
   string m_level;
