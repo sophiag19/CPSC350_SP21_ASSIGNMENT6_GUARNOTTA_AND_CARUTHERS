@@ -1,10 +1,17 @@
+/* Sarah Caruthers and Sophia Guarnotta
+2350081, 
+caruthers@chapman.edu, guarnotta@chapman.edu
+CPSC 350-03
+Programming Assignment 6: Building a DataBase with Bianry Search Trees
+*/ 
+
 #ifndef BST_H
 #define BST_H
 
 #include <cstdlib>
 #include <iostream>
 #include "DLList.h"
-#include "Student.h"
+#include "Student.h" 
 #include <string>
 #include <fstream>
 using namespace std;

@@ -1,3 +1,11 @@
+  
+/* Sarah Caruthers and Sophia Guarnotta
+2350081, 
+caruthers@chapman.edu, guarnotta@chapman.edu
+CPSC 350-03
+Programming Assignment 6: Building a DataBase with Bianry Search Trees
+*/ 
+
 #include "Faculty.h"
 
 using namespace std;
