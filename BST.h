@@ -1,5 +1,5 @@
 /* Sarah Caruthers and Sophia Guarnotta
-2350081, 
+2350081, 2369941
 caruthers@chapman.edu, guarnotta@chapman.edu
 CPSC 350-03
 Programming Assignment 6: Building a DataBase with Bianry Search Trees
@@ -48,12 +48,12 @@ class BST{
 public:
   BST();
   ~BST();
-  int containsID(int d);
+  int containsID(int d); // checks a node for a specified id, returns the id
   bool contains(int d);
-  bool containsCheck(int d);
+  bool containsCheck(int d); // returns boolean if a tree contains a specified person
   void insert(T d);
   bool recContains(T d);
-  DLList<int>* containsAdviseeList(int d);
+  DLList<int>* containsAdviseeList(int d); // returns the advisee list of a specified faculty member
   void printInOrder();
   void printPostOrder();
   void deleteValue(int d);

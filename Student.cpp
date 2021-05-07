@@ -1,3 +1,10 @@
+/* Sarah Caruthers and Sophia Guarnotta
+2350081, 2369941
+caruthers@chapman.edu, guarnotta@chapman.edu
+CPSC 350-03
+Programming Assignment 6: Building a DataBase with Bianry Search Trees
+*/ 
+
 #include "Student.h"
 
 Student::Student(){
@@ -10,6 +17,7 @@ Student::Student(){
   m_facAdvisiD = 0;
 }
 
+// defualt constructor
 Student::Student(string name, int iD, string level, int gradYear, string major, double gpa, int facAdvisiD){
   m_name = name;
   m_iD = iD;
@@ -48,6 +56,7 @@ void Student::setGpa(double gpa){
 void Student::setFacAdvisID(int facAdvisiD){
   m_facAdvisiD = facAdvisiD;
 }
+
 void Student::printInfo(){
   cout << "ID number: " << m_iD << endl;
   cout << "Name: " << m_name << endl;
@@ -58,6 +67,7 @@ void Student::printInfo(){
   cout << "Faculty Advisor ID: " << m_facAdvisiD << endl;
  }
 
+// for files - allows us to print the student to studentTable
  string Student::toString(){
    string iD = to_string(m_iD);
    string year = to_string(m_gradYear);
@@ -94,6 +104,7 @@ int Student::getFacAdvisiD(){
   return m_facAdvisiD;
 }
 
+// operator overloading 
 // lines 79-99: https://www.tutorialspoint.com/cplusplus/cpp_overloading.htm
 bool Student::operator<(Student &s2){
   int sid = this->getID();
