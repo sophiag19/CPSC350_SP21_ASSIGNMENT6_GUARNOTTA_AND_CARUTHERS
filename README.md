@@ -1,4 +1,4 @@
-# CPSC350_SP21_ASSIGNMENT6_
+# CPSC350_SP21_ASSIGNMENT6_CARUTHERSANDGUARNOTTA
 
 1. Sophia Guarnotta
 
@@ -32,9 +32,9 @@
 
    main.cpp
 
-3. For this assignment we talked to Jessica Viner about using a stack for the rollback method.
+3. For this assignment we worked with each other and also talked to Jessica Viner about using a stack for the rollback method.
 
-4. For this assignment we referenced https://www.geeksforgeeks.org/stdto_string-in-cpp/ and https://www.tutorialspoint.com/cplusplus/cpp_overloading.htm 
+4. For this assignment we referenced https://www.geeksforgeeks.org/stdto_string-in-cpp/ and https://www.tutorialspoint.com/cplusplus/cpp_overloading.htm
 
 5. make
 
