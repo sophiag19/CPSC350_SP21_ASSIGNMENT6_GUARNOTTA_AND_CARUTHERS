@@ -32,7 +32,7 @@
 
    main.cpp
 
-3. For this assignment we talked to Jessica Viner about using a stack for the rollback method.
+3. For this assignment we talked to Jessica Viner about using a stack for the rollback method. We also added graduation year for students becuase we thought we were supposed to include it. The damage was already done by the time we relized we didn't need it :).
 
 4. For this assignment we referenced https://www.geeksforgeeks.org/stdto_string-in-cpp/ and https://www.tutorialspoint.com/cplusplus/cpp_overloading.htm 
 
