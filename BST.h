@@ -1,5 +1,5 @@
 /* Sarah Caruthers and Sophia Guarnotta
-2350081, 
+2350081, 2369941
 caruthers@chapman.edu, guarnotta@chapman.edu
 CPSC 350-03
 Programming Assignment 6: Building a DataBase with Bianry Search Trees
