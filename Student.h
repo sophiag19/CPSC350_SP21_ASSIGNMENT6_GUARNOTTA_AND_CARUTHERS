@@ -3,11 +3,10 @@
 #include "DLList.h"
 #include <fstream>
 #include "BST.h"
-//#include "Person.h"
 
 using namespace std;
 
-class Student/*: public Person*/{
+class Student{
 public:
   Student();
   Student(string name, int iD, string level, int gradYear, string major, double gpa, int facAdvisiD);
@@ -22,7 +21,6 @@ public:
   void setFacAdvisID(int facAdvisiD);
   void printInfo();
   string toString();
-
   string getName();
   int getID();
   string getLevel();

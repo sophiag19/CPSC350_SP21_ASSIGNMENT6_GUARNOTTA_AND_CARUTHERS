@@ -38,17 +38,15 @@ int Simulation::displayMenu(){
 }
 
 void Simulation::simulate(){
-
+  readFiles();
   int userChoice;
   userChoice = displayMenu();
   while(userChoice != 14){
     if(userChoice == 1){
       printStudnetsAscending();
-      //rollStack->push(1);
     }
     else if(userChoice == 2){
       printFacultyAscending();
-      //rollStack->push(2);
     }
 
     else if(userChoice == 3){
@@ -56,7 +54,6 @@ void Simulation::simulate(){
       cout << "What is the student's ID number?" << endl;
       cin >> id;
       printStudentGivenID( id);
-      //rollStack->push();
     }
 
     else if(userChoice == 4){
@@ -140,17 +137,16 @@ void Simulation::simulate(){
     userChoice = displayMenu();
 
   }
-  //print out files
+
   BST<Student>* tempStudent = new BST<Student>;
   tempStudent = goldStudent;
 
   BST<Faculty>* tempFaculty = new BST<Faculty>;
   tempFaculty = goldFaculty;
 
-  goldStudent->fileProcessor("StudentTable.txt");
-  goldFaculty->fileProcessor("FacultyTable.txt");
+  goldStudent->fileProcessor("studentTable.txt");
+  goldFaculty->fileProcessor("facultyTable.txt");
   }
-//}
 
 void Simulation::printStudnetsAscending(){
   goldStudent->printInOrder();
@@ -217,11 +213,11 @@ void Simulation::createAndAddFaculty(){
   cin >> dept;
   Faculty temp(name, id, level, dept);
   cout << "Please enter all advisee ID numbers one at a time, when you are done, enter 0 :" << endl;
+  cin >> tempAdvisee;
   while(tempAdvisee != 0){
-    cin >> tempAdvisee;
-    //cout << tempAdvisee << endl;
     temp.addAdvisee(tempAdvisee);
     deletedFaculty = temp;
+    cin >> tempAdvisee;
   }
   goldFaculty->insert(temp);
   rollStack->push(id);
@@ -240,9 +236,11 @@ void Simulation::printFacultyGivenID(int id){
 
 void Simulation::deleteStudent(int id){
   goldStudent->deleteValue(id);
+  //deleteAdvisee(id, )
 }
 
 void Simulation::deleteFaculty(int id){
+  advisee = goldFaculty->containsAdviseeList(id);
   goldFaculty->deleteValue(id);
 }
 
@@ -271,13 +269,7 @@ int Simulation::changeStudentAdvisor(int studentID, int facultyID){
   }
 
 }
-void Simulation::addAdviseeRoll(int sID, int fID){
-  /*
-  Faculty f;
-  f = goldFaculty->containsFac(fID);
-  f.addAdvisee(sID);
-  */
-}
+
 
 int Simulation::deleteAdvisee(int studentID, int facultyID){
   advisee = goldFaculty->containsAdviseeList(facultyID);
@@ -287,6 +279,63 @@ int Simulation::deleteAdvisee(int studentID, int facultyID){
     }
   }
   return studentID;
+}
+
+void Simulation::readFiles(){
+    ifstream inFS;
+    ifstream inFS2;
+    string fileLine;
+    string fileLine2;
+      inFS.open("studentTable.txt");
+      cout << "Student file opened" << endl;
+      getline(inFS, fileLine);
+      while(!inFS.fail()){
+        cout << "file line: " << fileLine << endl;
+        string name = fileLine;
+        cout << "name " << name << endl;
+        getline(inFS, fileLine);
+        int id = stoi(fileLine);
+        getline(inFS, fileLine);
+        string level = fileLine;
+        getline(inFS, fileLine);
+        int gradYear = stoi(fileLine);
+        getline(inFS, fileLine);
+        double gpa = stod(fileLine);
+        getline(inFS, fileLine);
+        string major = fileLine;
+        getline(inFS, fileLine);
+        int facID = stoi(fileLine);
+        Student temp(name, id, level, gradYear, major, gpa, facID);
+        temp.printInfo();
+        goldStudent->insert(temp);
+        getline(inFS, fileLine);
+      }
+      inFS.close();
+      inFS2.open("facultyTable.txt");
+      cout << "fac file opened" << endl;
+      getline(inFS2, fileLine2);
+      while(!inFS2.fail()){
+        cout << "file line2: " << fileLine2 << endl;
+        string name = fileLine2;
+        cout << "name: " << name << endl;
+        getline(inFS2, fileLine2);
+        int id = stoi(fileLine2);
+        getline(inFS2, fileLine2);
+        string level = fileLine2;
+        getline(inFS2, fileLine2);
+        string department = fileLine2;
+        Faculty temp(name, id, level, department);
+        getline(inFS2, fileLine2);
+        int numAdvisees = stoi(fileLine2);
+        for(int i = 0; i < numAdvisees;++i){
+          getline(inFS2, fileLine2);
+          temp.addAdvisee(stoi(fileLine2));
+        }
+        goldFaculty->insert(temp);
+        getline(inFS2, fileLine2);
+      }
+      inFS2.close();
+
 }
 
 void Simulation::rollBack(){

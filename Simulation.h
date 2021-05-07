@@ -8,18 +8,16 @@
 #include "BST.h"
 #include "DLLStack.h"
 #include <fstream>
+#include <string>
 
 using namespace std;
 
-
-// need to write general find node alg to find all the people
 class Simulation{
 public:
   Simulation();
   ~Simulation();
   void simulate();
   int displayMenu();
-  void addAdviseeRoll(int sID, int fID);
   void createAndAddStudent();
   void createAndAddFaculty();
   void printStudnetsAscending();
@@ -30,6 +28,7 @@ public:
   void printFacAdviseeList(int iD); // open loop on facTree, store current ID in variable, traverse goldStudent for ID and printInfo()
   void deleteStudent(int iD); // call removeFrom()
   void deleteFaculty(int iD);
+  void readFiles();
   void addStudent(string name, int id, string level, int gradYear, string major, double gpa, int facAdvisId);
   void addFaculty(string name, int id, string level, string dept);
   int changeStudentAdvisor(int studentID, int facultyID); // update student.setFacAdvisID() with new ID

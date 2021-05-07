@@ -46,7 +46,6 @@ public:
   bool containsCheck(int d);
   void insert(T d);
   bool recContains(T d);
-  T* containsFac(int d);
   DLList<int>* containsAdviseeList(int d);
   void printInOrder();
   void printPostOrder();
@@ -106,15 +105,11 @@ void BST<T>::fileProcessor(string outFile){
 }
 template <typename T>
 void BST<T>::fileProcessorHelper(TreeNode<T>* n, string outFile, ofstream& outFS){
-  //ofstream outFS;
-  //outFS.open(outFile);
   if(n!=NULL){
     fileProcessorHelper(n->left, outFile, outFS);
-    //n->data.print(outFS);
     outFS << n->data.toString();
     fileProcessorHelper(n->right, outFile, outFS);
   }
-  //outFS.close();
 }
 
 template <typename T>
@@ -305,39 +300,6 @@ int BST<T>::containsChange(int studentID, int facultyID){ //no repeated values
   return prevID;
 }
 
-template <typename T>
-T* BST<T>::containsFac(int d){ //no repeated values
-  /*
-  T* fac = new Faculty;
-  if(root==NULL){
-    return fac;
-  }
-  if(root->data.getID()==d){
-    //root->data;
-    fac = root->data;
-    return fac;
-  }
-  bool found = false;
-  TreeNode<T>* current = root;
-  while(!found){
-    if(d > current->data.getID()){
-      current = current->right;
-    } else{
-      current = current->left;
-    }
-    if(current==NULL){
-      found = false;
-      break;
-    }
-    if(current->data.getID()==d){
-      fac = current->data;
-      found = true;
-      break;
-    }
-  }
-  return fac;
-  */
-}
 
 template <typename T>
 void BST<T>::insert(T d){
@@ -436,7 +398,6 @@ void BST<T>::deleteValue(int d){
   if(current==NULL){
     return;
   }
-
   //check if leaf
   if(current->left==NULL && current->right==NULL){
     //leaf is root

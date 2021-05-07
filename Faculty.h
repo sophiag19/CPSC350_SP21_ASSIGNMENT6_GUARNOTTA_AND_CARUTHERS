@@ -1,11 +1,13 @@
 #ifndef FACULTY_H
 #define FACULTY_H
-//#include "Person.h"
 #include "DLList.h"
 
 using namespace std;
 
-class Faculty/*: public Person*/{
+/*
+ * Header file for Faculty class, contains necessary methods, member variables, and overloaded operators
+ */
+class Faculty{
 public:
   Faculty();
   Faculty(string name, int iD, string level, string dept);
