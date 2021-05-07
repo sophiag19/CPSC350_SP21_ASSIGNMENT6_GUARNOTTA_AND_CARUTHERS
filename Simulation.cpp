@@ -14,10 +14,10 @@ Simulation::Simulation(){
   goldFaculty = new BST<Faculty>;
   advisee = new DLList<int>;
   rollStack = new DlStack<int>;
-  deletedStudent = Student();
-  deletedFaculty = Faculty();
-  prevFacID = 0;
-  adviseeID = 0;
+  deletedStudent = Student(); // stores deleted student for rollback method
+  deletedFaculty = Faculty(); // stores deleted faculty member for rollback method
+  prevFacID = 0; // stores a student's current faculty advisor id before changing the faculty advisor id for rollback method
+  adviseeID = 0; // store deleted advisee id for rollback method
 }
 
 Simulation::~Simulation(){
@@ -197,6 +197,8 @@ void Simulation::createAndAddStudent(){
   goldStudent->insert(temp);
   rollStack->push(id);
 }
+
+// for rollback method
 void Simulation::addStudent(string name, int id, string level, int gradYear, string major, double gpa, int facAdvisId){
   Student temp(name, id, level, gradYear, major, gpa, facAdvisId);
   goldStudent->insert(temp);
@@ -230,6 +232,7 @@ void Simulation::createAndAddFaculty(){
   rollStack->push(id);
 }
 
+// for rollback method
 void Simulation::addFaculty(string name, int id, string level, string dept){
   Faculty temp(name, id, level, dept);
   goldFaculty->insert(temp);
@@ -289,10 +292,10 @@ int Simulation::deleteAdvisee(int studentID, int facultyID){
 }
 
 void Simulation::readFiles(){
-    ifstream inFS;
-    ifstream inFS2;
-    string fileLine;
-    string fileLine2;
+    ifstream inFS; // student buffer
+    ifstream inFS2; // faculty buffer
+    string fileLine; // for student
+    string fileLine2; // for faculty 
       inFS.open("studentTable.txt");
       cout << "Student file opened" << endl;
       getline(inFS, fileLine);
@@ -346,33 +349,35 @@ void Simulation::readFiles(){
 }
 
 void Simulation::rollBack(){
-  if (rollStack->peek() == 7){
-    rollStack->pop();
+  if (rollStack->peek() == 7){ // tells us which action to undo - undoing the added student
+    rollStack->pop(); // pop the indicator
     int id = rollStack->pop();
     deleteStudent(id);
   }
 
-  else if (rollStack->peek() == 8){
+  else if (rollStack->peek() == 8){ // undoing the deleted student
     rollStack->pop();
+    // use stored class member to access values and add student
     addStudent(deletedStudent.getName(), deletedStudent.getID(), deletedStudent.getLevel(), deletedStudent.getGradYear(), deletedStudent.getMajor(), deletedStudent.getGpa(), deletedStudent.getFacAdvisiD());
   }
-  else if (rollStack->peek() == 9){
+  else if (rollStack->peek() == 9){ // undoing the added faculty member
     rollStack->pop();
-    int id = rollStack->pop();
+    int id = rollStack->pop(); 
     deleteFaculty(id);
   }
-  else if (rollStack->peek() == 10){
+  else if (rollStack->peek() == 10){ // undoing the deleted faculty member
     rollStack->pop();
+    // use stored class member to access values and re-add faculty member 
     addFaculty(deletedFaculty.getName(), deletedFaculty.getID(), deletedFaculty.getLevel(), deletedFaculty.getDepartment());
   }
-  else if(rollStack->peek() == 11){
+  else if(rollStack->peek() == 11){ // un do the changed advisor
     rollStack->pop();
     int prevID = rollStack->pop();
     int stuID = rollStack->pop();
     changeStudentAdvisor(stuID, prevID);
 
   }
-  else if(rollStack->peek() == 12){
+  else if(rollStack->peek() == 12){ // re-add removed advisee
     rollStack->pop();
     int adviseeId = rollStack->pop();
     int facId = rollStack->pop();
