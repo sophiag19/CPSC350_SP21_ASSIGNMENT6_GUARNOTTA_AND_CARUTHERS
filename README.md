@@ -1,18 +1,16 @@
-# CPSC350_SP21_ASSIGNMENT6_CARUTHERSANDGUARNOTTA
+# Student-Database-Class-Project
 
 1. Sophia Guarnotta
 
-  2369941
-
   Sarah Caruthers
-
-  2350081
 
   CPSC 350-03
 
   Programming Assignment 6: Building a Database with Binary Search Trees
 
-2. BST.h
+2. Files:
+
+   BST.h
 
    DLList.h
 
@@ -32,10 +30,11 @@
 
    main.cpp
 
-3. For this assignment we talked to Jessica Viner about using a stack for the rollback method. We also added graduation year for students because we thought we were supposed to include it. The damage was already done by the time we realized we didn't need it :).
 
 4. For this assignment we referenced https://www.geeksforgeeks.org/stdto_string-in-cpp/ and https://www.tutorialspoint.com/cplusplus/cpp_overloading.htm
 
-5. make
+5. To Run:
+
+   make
 
   ./assignment6.exe
