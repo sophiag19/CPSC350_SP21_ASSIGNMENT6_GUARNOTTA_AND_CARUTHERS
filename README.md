@@ -1,40 +1,26 @@
-# Student-Database-Class-Project
-
-1. Sophia Guarnotta
-
-  Sarah Caruthers
-
+# CPSC350_SP21_ASSIGNMENT6_GUARNOTTA_AND_CARUTHERS
   CPSC 350-03
-
   Programming Assignment 6: Building a Database with Binary Search Trees
 
-2. Files:
+## Group Members
+- Sophia Guarnotta
+- Sarah Caruthers
 
-   BST.h
+## Files
+- BST.h
+- DLList.h
+- DLLStack.h
+- Faculty.h
+- Faculty.cpp
+- Simulation.h
+- Simulation.cpp
+- Student.h
+- Student.cpp
+- main.cpp
 
-   DLList.h
+## References
+For this assignment, we referenced https://www.geeksforgeeks.org/stdto_string-in-cpp/ and https://www.tutorialspoint.com/cplusplus/cpp_overloading.htm
 
-   DLLStack.h
-
-   Faculty.h
-
-   Faculty.cpp
-
-   Simulation.h
-
-   Simulation.cpp
-
-   Student.h
-
-   Student.cpp
-
-   main.cpp
-
-
-4. For this assignment we referenced https://www.geeksforgeeks.org/stdto_string-in-cpp/ and https://www.tutorialspoint.com/cplusplus/cpp_overloading.htm
-
-5. To Run:
-
-   make
-
-  ./assignment6.exe
+## To Run The Program
+make
+ ./assignment6.exe
