@@ -1,5 +1,6 @@
 # CPSC350_SP21_ASSIGNMENT6_GUARNOTTA_AND_CARUTHERS
   CPSC 350-03
+  
   Programming Assignment 6: Building a Database with Binary Search Trees
 
 ## Group Members
